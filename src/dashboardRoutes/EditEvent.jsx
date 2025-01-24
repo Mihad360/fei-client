@@ -1,13 +1,15 @@
 import { useForm } from "react-hook-form";
-import { useLoaderData, useParams } from "react-router-dom";
-import useAxiosPublic from "../hooks/useAxiosPublic";
+import { useParams } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import { useEffect, useState } from "react";
 
 const EditEvent = () => {
-  const event = useLoaderData();
-  const axiosPublic = useAxiosPublic()
-  const {id} = useParams()
+  const [event, setEvent] = useState(null);
+  const axiosSecure = useAxiosSecure();
+  const { id } = useParams();
 
+  // console.log(event);
   const {
     register,
     handleSubmit,
@@ -16,16 +18,17 @@ const EditEvent = () => {
 
   const onSubmit = async (data) => {
     const eventInfo = {
-      title: data.title,
-      description: data.description,
-      date: data.date,
-      location: data.location,
-      eventTime: data.eventTime,
-      status: data.status,
-      category: data.category,
+      title: data?.title || event?.title,
+      description: data?.description || event?.description,
+      date: data?.date || event?.date,
+      location: data?.location || event?.location,
+      eventTime: data?.eventTime || event?.eventTime,
+      status: data?.status || event?.status,
+      category: data?.category || event?.category,
     };
-    const response = await axiosPublic.patch(`/events/${id}`, eventInfo)
-    if(response?.data.modifiedCount > 0){
+    console.log(eventInfo);
+    const response = await axiosSecure.patch(`/events/${id}`, eventInfo);
+    if (response?.data.modifiedCount > 0) {
       toast("✔️ The Event was Edited successfully", {
         position: "top-right",
         autoClose: 3000,
@@ -39,6 +42,18 @@ const EditEvent = () => {
       });
     }
   };
+
+  useEffect(() => {
+    try {
+      const fetchEvent = async () => {
+        const response = await axiosSecure.get(`/events/${id}`);
+        setEvent(response?.data);
+      };
+      fetchEvent();
+    } catch (error) {
+      console.log(error);
+    }
+  }, [axiosSecure, id]);
 
   return (
     <div className="pt-5">
@@ -59,7 +74,7 @@ const EditEvent = () => {
                 defaultValue={event?.title}
                 id="title"
                 type="text"
-                {...register("title", { required: "Title is required" })}
+                {...register("title")}
                 className="w-full px-4 py-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-fuchsia-600"
               />
               {errors.title && (
@@ -78,7 +93,7 @@ const EditEvent = () => {
                 defaultValue={event?.date}
                 id="date"
                 type="date"
-                {...register("date", { required: "Date is required" })}
+                {...register("date")}
                 //  defaultValue='' // Set the current date as default value
                 className="w-full px-4 py-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-fuchsia-600"
               />
@@ -100,12 +115,14 @@ const EditEvent = () => {
                 defaultValue={event?.eventTime}
                 id="eventTime"
                 type="text"
-                {...register("eventTime", { required: "Time is required" })}
+                {...register("eventTime")}
                 //  defaultValue='' // Set the current date as default value
                 className="w-full px-4 py-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-fuchsia-600"
               />
-              {errors.date && (
-                <p className="text-red-500 text-sm">{errors.date.message}</p>
+              {errors.eventTime && (
+                <p className="text-red-500 text-sm">
+                  {errors.eventTime.message}
+                </p>
               )}
             </div>
             <div className="mb-4 w-full">
@@ -113,12 +130,13 @@ const EditEvent = () => {
                 htmlFor="status"
                 className="block text-sm font-medium text-gray-700"
               >
-                Present Status <span className="text-rose-600">(Key Information)</span>
+                Present Status{" "}
+                <span className="text-rose-600">(Key Information)</span>
               </label>
               <select
                 defaultValue={event?.status}
                 id="status"
-                {...register("status", { required: "status is required" })}
+                {...register("status")}
                 className="w-full px-4 py-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-fuchsia-600"
               >
                 <option value="" disabled>
@@ -128,9 +146,7 @@ const EditEvent = () => {
                 <option value="Event completed">Event completed</option>
               </select>
               {errors.status && (
-                <p className="text-red-500 text-sm">
-                  {errors.status.message}
-                </p>
+                <p className="text-red-500 text-sm">{errors.status.message}</p>
               )}
             </div>
           </div>
@@ -148,7 +164,7 @@ const EditEvent = () => {
                 defaultValue={event?.location}
                 id="location"
                 type="text"
-                {...register("location", { required: "Location is required" })}
+                {...register("location")}
                 className="w-full px-4 py-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-fuchsia-600"
               />
               {errors.location && (
@@ -171,7 +187,7 @@ const EditEvent = () => {
               <select
                 defaultValue={event?.category}
                 id="category"
-                {...register("category", { required: "Category is required" })}
+                {...register("category")}
                 className="w-full px-4 py-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-fuchsia-600"
               >
                 <option value="" disabled>
@@ -204,9 +220,7 @@ const EditEvent = () => {
               defaultValue={event?.description}
               id="description"
               rows="4"
-              {...register("description", {
-                required: "Description is required",
-              })}
+              {...register("description")}
               className="w-full px-4 py-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-fuchsia-600"
             ></textarea>
             {errors.description && (

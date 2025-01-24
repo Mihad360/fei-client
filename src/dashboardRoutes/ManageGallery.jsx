@@ -1,10 +1,11 @@
 import Swal from "sweetalert2";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import useGallery from "../hooks/useGallery";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const ManageGallery = () => {
   const [gallery, refetch] = useGallery();
-  const axiosPublic = useAxiosPublic()
+  const axiosSecure = useAxiosSecure()
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -17,7 +18,7 @@ const ManageGallery = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosPublic.delete(`/gallery/${id}`).then((res) => {
+        axiosSecure.delete(`/gallery/${id}`).then((res) => {
           console.log(res);
           if (res?.data.deletedCount > 0) {
             Swal.fire({

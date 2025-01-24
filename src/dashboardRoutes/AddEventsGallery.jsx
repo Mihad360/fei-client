@@ -1,13 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
-import useAxiosPublic from "../hooks/useAxiosPublic";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_KEY;
 const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddEventsGallery = () => {
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure()
 
   const { register, handleSubmit, control, reset } = useForm({
     defaultValues: {
@@ -58,7 +58,7 @@ const AddEventsGallery = () => {
         images: uploadedImageUrls,
       };
 
-      const galleryResponse = await axiosPublic.post("/gallery", eventData);
+      const galleryResponse = await axiosSecure.post("/gallery", eventData);
 
       console.log("Gallery Response:", galleryResponse);
       console.log("Event Data with Uploaded Images:", eventData);

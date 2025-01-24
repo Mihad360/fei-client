@@ -1,14 +1,17 @@
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
-import { useEffect } from "react";
 import axios from "axios";
 import { Bounce, toast } from "react-toastify";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_KEY;
 const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddEvents = () => {
+
+  const axiosSecure = useAxiosSecure()
+
   const {
     register,
     handleSubmit,
@@ -35,9 +38,10 @@ const AddEvents = () => {
       location: data.location,
       category: data.category,
       year: data.year,
-      eventTime: data.time
+      eventTime: data.time,
+      publishedDate: currentDate,
     };
-    const res = await axios.post("http://localhost:5000/events", eventInfo);
+    const res = await axiosSecure.post("/events", eventInfo);
     console.log(res);
     if (res?.data.insertedId) {
       toast("✔️ The Event was added successfully", {

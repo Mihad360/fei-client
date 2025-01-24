@@ -2,11 +2,13 @@ import { Link } from "react-router-dom";
 import useEvents from "../hooks/useEvents";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const ManageEvents = () => {
   const [events, refetch] = useEvents();
 
   const axiosPublic = useAxiosPublic()
+  const axiosSecure = useAxiosSecure()
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -19,7 +21,7 @@ const ManageEvents = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosPublic.delete(`/event/${id}`).then((res) => {
+        axiosSecure.delete(`/event/${id}`).then((res) => {
           console.log(res);
           if (res?.data.deletedCount > 0) {
             Swal.fire({

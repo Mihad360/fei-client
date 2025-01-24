@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
   Calendar,
   GalleryHorizontal,
@@ -7,8 +7,18 @@ import {
   LogOut,
   LucideSquareFunction,
 } from "lucide-react";
+import useAuth from "../hooks/useAuth";
 
 const Sidebar = () => {
+
+  const { user, logout } = useAuth();
+  const navigate = useNavigate()
+
+  const handleLogOut =async () =>{
+    await logout();
+    navigate("/");
+  }
+
   return (
     <div className="w-72 h-screen z-10 text-white p-6 relative">
       {/* Subtle pattern overlay */}
@@ -246,8 +256,8 @@ const Sidebar = () => {
               )}
             </NavLink>
           </li>
-          <li className="border-t border-fuchsia-400 pt-4">
-            <button className="flex gap-3 w-full items-center py-3 px-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-lg group bg-rose-700 bg-opacity- hover:bg-rose-800">
+          <li className="border-t border-fuchsia-400 pt-4 pb-20">
+            <button onClick={handleLogOut} className="flex gap-3 w-full items-center py-3 px-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-lg group bg-rose-700 bg-opacity- hover:bg-rose-800">
               <>
                 <LogOut />
                 <span className="font-medium">Log Out</span>
@@ -256,9 +266,6 @@ const Sidebar = () => {
           </li>
         </ul>
       </nav>
-
-      {/* Decorative element */}
-      {/* <div className="absolute bottom-6 left-6 right-6 h-px bg-gradient-to-r from-transparent via-fuchsia-300 to-transparent opacity-30"></div> */}
     </div>
   );
 };

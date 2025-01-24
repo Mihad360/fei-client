@@ -5,39 +5,46 @@ const NewEvent = ({ event }) => {
   const {
     title,
     image,
-    description,
     date,
     location,
     category,
-    year,
     status,
     eventTime,
+    publishedDate,
+    _id,
   } = event;
 
   return (
-    <div className="max-w-md mx-auto overflow-hidden rounded-lg shadow-lg bg-white dark:bg-gray-800">
-      <img src={image} alt={title} className="w-full h-56 object-cover" />
+    <div className="mx-auto overflow-hidden rounded-lg dark:bg-gray-800 w-64 sm:w-80 md:w-96 lg:w-full">
+      {/* Event Image */}
+      <img
+        src={image}
+        alt={title}
+        className="w-full h-48 sm:h-56 md:h-64 object-cover"
+      />
 
       {/* Card Content */}
       <div className="p-5 space-y-4">
+        {/* Title and Category */}
         <div>
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white">
             {title}
           </h2>
-          <div className="flex justify-between items-center">
-            <span className="inline-block px-3 py-1 mt-2 text-sm font-semibold text-white bg-indigo-600 rounded-full">
+          <div className="flex justify-between items-center mt-2">
+            <span className="inline-block px-3 py-1 text-xs sm:text-sm font-semibold text-white bg-indigo-600 rounded-full">
               {category} Program
             </span>
-            <span className="inline-block px-3 py-1 mt-2 text-sm font-semibold text-white bg-rose-600 rounded-full">
-              {status} {status === 'New Event' && "Coming Soon"}
+            <span className="inline-block px-3 py-1 text-xs sm:text-sm font-semibold text-white bg-rose-600 rounded-full">
+              {status} {status === "New Event" && "Coming Soon"}
             </span>
           </div>
         </div>
 
-        <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
+        {/* Event Date and Location */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between text-sm text-gray-500 dark:text-gray-400">
           <div className="flex items-center font-bold">
             <svg
-              className="w-5 h-5 text-blue-500 mr-1"
+              className="w-4 sm:w-5 h-4 sm:h-5 text-blue-500 mr-1"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
@@ -46,9 +53,9 @@ const NewEvent = ({ event }) => {
             </svg>
             {date} at {eventTime}
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center mt-2 sm:mt-0">
             <svg
-              className="w-5 h-5 text-green-500 mr-1"
+              className="w-4 sm:w-5 h-4 sm:h-5 text-green-500 mr-1"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
@@ -58,15 +65,18 @@ const NewEvent = ({ event }) => {
             {location}
           </div>
         </div>
-        <div className="flex items-center justify-between">
+
+        {/* Published Date and Link */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between">
           <div className="text-sm text-gray-400 dark:text-gray-500">
-            Published: {date}
+            Published: {publishedDate}
           </div>
-          <div>
-            <Link className=" bg-fuchsia-600 text-white px-6 py-2 rounded-md hover:bg-fuchsia-700 focus:outline-none">
-              View Program
-            </Link>
-          </div>
+          <Link
+            to={`/event/${_id}`}
+            className="mt-3 sm:mt-0 bg-fuchsia-600 text-white px-4 sm:px-6 py-2 rounded-md hover:bg-fuchsia-700 focus:outline-none"
+          >
+            View Program
+          </Link>
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ const NewEvents = () => {
 
   return (
     <div>
-      <div className="min-h-screen max-w-[1400px] mx-auto pt-16">
+      <div className="max-w-[1400px] mx-auto pt-16">
         <h1 className="text-4xl font-bold text-center pb-16 text-purple-700">
           Upcoming New Events
         </h1>
@@ -23,7 +23,7 @@ const NewEvents = () => {
         </Marquee>
       </div>
 
-      <div className="text-center">
+      <div className="text-center pt-12">
         <Link to='/events' className=" bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 focus:outline-none">
           View All Events
         </Link>

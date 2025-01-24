@@ -14,6 +14,8 @@ import PrivateRoute from "./PrivateRoute";
 import AllUsers from "../dashboardRoutes/AllUsers";
 import Gallery from "../gallery/Gallery";
 import Adminroute from "./Adminroute";
+import GalleryCards from "../gallery/GalleryCards";
+import EventsCard from "../eventRoutes/EventsCard";
 
 const router = createBrowserRouter([
   {
@@ -26,51 +28,93 @@ const router = createBrowserRouter([
       },
       {
         path: "/events",
-        element: <PrivateRoute><Events></Events></PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <Events></Events>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/event/:id",
+        element: <EventsCard></EventsCard>,
       },
       {
         path: "/gallery",
-        element: <Gallery></Gallery>
+        element: (
+          <PrivateRoute>
+            <GalleryCards></GalleryCards>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/gallery/:id",
+        element: <Gallery></Gallery>,
       },
       {
         path: "/signin",
-        element: <SignIn></SignIn>
+        element: <SignIn></SignIn>,
       },
       {
         path: "/signup",
-        element: <SignUp></SignUp>
+        element: <SignUp></SignUp>,
       },
     ],
   },
   {
     path: "/dashboard",
-    element: <Adminroute><Dashboard></Dashboard></Adminroute>,
+    element: (
+      <Adminroute>
+        <Dashboard></Dashboard>
+      </Adminroute>
+    ),
     children: [
       {
         path: "/dashboard/add-events",
-        element: <AddEvents></AddEvents>,
+        element: (
+          <Adminroute>
+            <AddEvents></AddEvents>
+          </Adminroute>
+        ),
       },
       {
         path: "/dashboard/add-photos-gallery",
-        element: <AddEventsGallery></AddEventsGallery>
+        element: (
+          <Adminroute>
+            <AddEventsGallery></AddEventsGallery>
+          </Adminroute>
+        ),
       },
       {
         path: "/dashboard/manage-events",
-        element: <ManageEvents></ManageEvents>,
+        element: (
+          <Adminroute>
+            <ManageEvents></ManageEvents>
+          </Adminroute>
+        ),
       },
       {
         path: "/dashboard/manage-events-gallery",
-        element: <ManageGallery></ManageGallery>
+        element: (
+          <Adminroute>
+            <ManageGallery></ManageGallery>
+          </Adminroute>
+        ),
       },
       {
         path: "/dashboard/all-users",
-        element: <AllUsers></AllUsers>
+        element: (
+          <Adminroute>
+            <AllUsers></AllUsers>
+          </Adminroute>
+        ),
       },
       {
         path: "/dashboard/manage-events/edit-event/:id",
-        element: <EditEvent></EditEvent>,
-        loader: ({ params }) =>
-          fetch(`http://localhost:5000/events/${params.id}`),
+        element: (
+          <Adminroute>
+            <EditEvent></EditEvent>
+          </Adminroute>
+        ),
       },
     ],
   },
