@@ -1,6 +1,7 @@
 import NewEvent from "./NewEvent";
 import Marquee from "react-fast-marquee";
 import useEvents from "../hooks/useEvents";
+import { Link } from "react-router-dom";
 
 const NewEvents = () => {
   const [events] = useEvents();
@@ -20,6 +21,12 @@ const NewEvents = () => {
               ))}
           </div>
         </Marquee>
+      </div>
+
+      <div className="text-center">
+        <Link to='/events' className=" bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 focus:outline-none">
+          View All Events
+        </Link>
       </div>
     </div>
   );

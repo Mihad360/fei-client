@@ -13,6 +13,7 @@ import SignUp from "../authentication/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import AllUsers from "../dashboardRoutes/AllUsers";
 import Gallery from "../gallery/Gallery";
+import Adminroute from "./Adminroute";
 
 const router = createBrowserRouter([
   {
@@ -43,7 +44,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: <Adminroute><Dashboard></Dashboard></Adminroute>,
     children: [
       {
         path: "/dashboard/add-events",

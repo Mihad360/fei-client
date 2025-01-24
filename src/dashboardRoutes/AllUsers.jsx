@@ -1,10 +1,12 @@
 import useUsers from "../hooks/useUsers";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const AllUsers = () => {
   const [users, refetch] = useUsers();
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure()
 
   const makeAdmin = (id) => {
     Swal.fire({
