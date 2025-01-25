@@ -56,13 +56,13 @@ const EditEvent = () => {
   }, [axiosSecure, id]);
 
   return (
-    <div className="pt-5">
-      <h1 className="text-center text-3xl font-semibold text-white pb-5">
+    <div className="pt-5 px-5">
+      <h1 className="text-center pt-10 md:pt-0 text-3xl font-semibold text-white pb-5">
         Add New Events
       </h1>
       <div className="max-w-6xl mx-auto p-6 bg-gray-300 rounded-lg shadow-md">
         <form className="" onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex gap-6">
+          <div className="flex flex-col lg:flex-row gap-6">
             <div className="mb-4 w-full">
               <label
                 htmlFor="title"
@@ -103,7 +103,7 @@ const EditEvent = () => {
             </div>
           </div>
 
-          <div className="flex gap-6">
+          <div className="flex flex-col lg:flex-row gap-6">
             <div className="mb-4 w-full">
               <label
                 htmlFor="eventTime"
@@ -151,7 +151,7 @@ const EditEvent = () => {
             </div>
           </div>
 
-          <div className="flex gap-6">
+          <div className="flex flex-col lg:flex-row gap-6">
             {/* Location */}
             <div className="mb-4 w-full">
               <label

@@ -1,8 +1,8 @@
-import AboutUs from "./AboutUs";
-import Banner from "./Banner";
-import Contact from "./Contact";
-import Galleries from "./galleries";
-import NewEvents from "./NewEvents";
+import Banner from './Banner'
+import NewEvents from './NewEvents'
+import Galleries from './Galleries'
+import AboutUs from './AboutUs'
+import Contact from './Contact'
 
 const Home = () => {
     return (

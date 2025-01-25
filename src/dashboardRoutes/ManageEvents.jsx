@@ -37,12 +37,12 @@ const ManageEvents = () => {
   };
 
   return (
-    <div className="p-5">
-      <h1 className="text-3xl font-bold text-white text-center dark:text-white mb-8">
+    <div className="p-5 px-5">
+      <h1 className="text-3xl font-bold text-white text-center pt-8 md:pt-0 dark:text-white mb-8">
         Manage Events
       </h1>
       <div className="overflow-x-auto">
-        <table className="max-w-7xl mx-auto bg-white dark:bg-gray-800 shadow-xl">
+        <table className="min-w-full mx-auto bg-white dark:bg-gray-800 shadow-xl">
           <thead>
             <tr className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
               <th className="px-4 py-4 text-left font-semibold">#</th>
@@ -72,23 +72,17 @@ const ManageEvents = () => {
                 <td className="px-4 py-4 text-gray-700 dark:text-gray-300">
                   {event.date}
                 </td>
-                <td className="px-4 py-4 text-black  dark:text-gray-300">
+                <td className="px-4 py-4 text-black dark:text-gray-300">
                   {event.status}
                 </td>
-                <td className="px-4 py-4 text-center flex justify-between">
-                  {/* <button
-                    className="px-4 py-2 mr-2 text-sm font-semibold text-white bg-fuchsia-600 rounded-lg hover:bg-fuchsia-700 shadow-md transition duration-200"
-                    onClick={() => console.log(`Edit ${event.title}`)}
-                  >
-                    Make Event Completed
-                  </button> */}
+                <td className="px-4 py-4 text-center flex justify-between flex-wrap gap-2">
                   <Link
                     to={`/dashboard/manage-events/edit-event/${event._id}`}
-                    className="px-4 py-2 mr-2 text-sm font-semibold text-white bg-fuchsia-600 rounded-lg hover:bg-fuchsia-700 shadow-md transition duration-200"
+                    className="px-4 py-2 text-sm font-semibold text-white bg-fuchsia-600 rounded-lg hover:bg-fuchsia-700 shadow-md transition duration-200"
                   >
                     Edit
                   </Link>
-                  <button onClick={()=>handleDelete(event._id)} className="px-4 py-2 text-sm font-semibold text-white bg-red-600 rounded-lg hover:bg-red-700 shadow-md transition duration-200">
+                  <button onClick={() => handleDelete(event._id)} className="px-4 py-2 text-sm font-semibold text-white bg-red-600 rounded-lg hover:bg-red-700 shadow-md transition duration-200">
                     Remove
                   </button>
                 </td>

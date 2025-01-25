@@ -29,7 +29,7 @@ const Banner = () => {
 
   return (
     <div className="pt-16">
-      <div className="relative h-screen md:h-[90vh] text-center flex items-center justify-center bg-gradient-to-br from-[#5a10cd] via-[#8b10cd] to-[#cd5a10]">
+      <div className="relative h-[90vh] text-center flex items-center justify-center bg-gradient-to-br from-[#5a10cd] via-[#8b10cd] to-[#cd5a10]">
         <div className="max-w-[1400px] mx-auto px-4">
           {/* Decorative Backdrops */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#3710cd]/50 via-transparent to-[#cd1010]/50"></div>
@@ -59,7 +59,7 @@ const Banner = () => {
                   <rect width="100%" height="100%" fill="url(#pattern)" />
                 </svg>
               </div>
-              <div className="z-30  pt-16 md:pt-0 text-center md:text-left md:w-1/2">
+              <div className="z-30 text-center md:text-left md:w-1/2">
                 <h1 className="text-2xl lg:text-5xl font-bold tracking-wide uppercase">
                   Welcome to The <br />
                   <p className="md:pt-2">International Students Society</p>

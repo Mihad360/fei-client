@@ -6,10 +6,10 @@ import useAdmin from "../hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
-  const navigate = useNavigate();
+  const [isAdmin] = useAdmin();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isAdmin] = useAdmin();
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     await logout();
@@ -85,7 +85,7 @@ const Navbar = () => {
             >
               Gallery
             </NavLink>
-            {isAdmin ? (
+            {user && isAdmin ? (
               <NavLink
                 to="/dashboard/manage-events"
                 className={({ isActive }) =>
@@ -152,7 +152,22 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Hamburger Menu */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-5">
+            {user && (
+              <img
+                className="w-12 h-12 rounded-full"
+                src={user?.photoURL}
+                alt={user?.displayName}
+              />
+            )}
+            {
+              !user ? <Link
+              to="/signin"
+              className="flex gap-3 items-center py-2 px-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-lg group bg-fuchsia-600 bg-opacity- hover:bg-fuchsia-800"
+            >
+              Sign In
+            </Link> : ""
+            }
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -202,17 +217,22 @@ const Navbar = () => {
               >
                 Gallery
               </NavLink>
-              <NavLink
-                to="/dashboard/manage-events"
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-white underline underline-offset-4"
-                    : "text-gray-300 hover:text-white transition"
-                }
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Dashboard
-              </NavLink>
+              {user && isAdmin ? (
+                <NavLink
+                  to="/dashboard/manage-events"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-white underline underline-offset-4"
+                      : "text-gray-300 hover:text-white transition"
+                  }
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Dashboard
+                </NavLink>
+              ) : (
+                ""
+              )}
+
               {user && (
                 <button
                   onClick={handleLogout}

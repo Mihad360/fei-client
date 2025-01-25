@@ -76,14 +76,14 @@ const AddEventsGallery = () => {
   };
 
   return (
-    <div className="pt-6">
-      <h2 className="text-3xl text-center font-semibold text-white pb-6">
+    <div className="pt-6 px-5 lg:px-0">
+      <h2 className="text-3xl text-center font-semibold text-white pl-8 md:pl-0 pb-6">
         Add Event Photos to Gallery
       </h2>
       <div className="max-w-5xl mx-auto p-6 bg-gray-200 rounded-md shadow-md">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {/* Title Field */}
-          <div className="flex gap-5">
+          <div className="grid gap-5 md:grid-cols-2">
             <div className="w-full">
               <label htmlFor="title" className="block text-black mb-2">
                 Title
@@ -112,7 +112,7 @@ const AddEventsGallery = () => {
           </div>
 
           {/* Images Field */}
-          <div className="">
+          <div>
             <label htmlFor="images" className="block text-black mb-2">
               Images
             </label>

@@ -9,7 +9,9 @@ const Galleries = () => {
 
   // Initialize AOS
   useEffect(() => {
-    AOS.init();
+    AOS.init({
+      duration: 3000
+    });
   }, []);
 
   // Slice the gallery to get only the last two events

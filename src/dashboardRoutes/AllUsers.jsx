@@ -58,8 +58,8 @@ const AllUsers = () => {
   };
 
   return (
-    <div className="p-5">
-      <h1 className="text-3xl font-bold text-white text-center dark:text-white mb-8">
+    <div className="p-5 px-5">
+      <h1 className="text-3xl pt-8 md:pt-0 font-bold text-white text-center dark:text-white mb-8">
         Manage users
       </h1>
       <div className="overflow-x-auto">

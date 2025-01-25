@@ -2,12 +2,16 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
   Calendar,
   GalleryHorizontal,
+  GalleryHorizontalEnd,
   Home,
   ListChecks,
   LogOut,
   LucideSquareFunction,
+  PhoneOutgoing,
+  User,
 } from "lucide-react";
 import useAuth from "../hooks/useAuth";
+import { SiEventbrite } from "react-icons/si";
 
 const Sidebar = () => {
 
@@ -91,7 +95,7 @@ const Sidebar = () => {
             >
               {({ isActive }) => (
                 <>
-                  <Calendar
+                  <GalleryHorizontalEnd
                     className={`mr-3 ${
                       isActive
                         ? "text-white"
@@ -116,7 +120,7 @@ const Sidebar = () => {
             >
               {({ isActive }) => (
                 <>
-                  <Calendar
+                  <SiEventbrite
                     className={`mr-3 ${
                       isActive
                         ? "text-white"
@@ -141,7 +145,7 @@ const Sidebar = () => {
             >
               {({ isActive }) => (
                 <>
-                  <Calendar
+                  <PhoneOutgoing
                     className={`mr-3 ${
                       isActive
                         ? "text-white"
@@ -166,7 +170,7 @@ const Sidebar = () => {
             >
               {({ isActive }) => (
                 <>
-                  <Calendar
+                  <User
                     className={`mr-3 ${
                       isActive
                         ? "text-white"

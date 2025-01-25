@@ -1,14 +1,17 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
+import MobSidebar from "./MobSidebar";
 
 const Dashboard = () => {
   return (
     <div>
       <div className="flex h-screen bg-gradient-to-r from-indigo-800 via-purple-800 to-fuchsia-900">
-        <div className="overflow-y-auto">
-          <Sidebar></Sidebar>
+        <div className="overflow-y-auto lg:hidden">
+          <MobSidebar /> {/* Mobile Sidebar */}
         </div>
-        {/* <div className="absolute bottom-6 left-6 right-6 h-px bg-gradient-to-b from-transparent via-fuchsia-300 to-transparent opacity-30"></div> */}
+        <div className="hidden lg:block overflow-y-auto">
+          <Sidebar /> {/* Desktop Sidebar */}
+        </div>
         <div className="flex-1 overflow-y-auto relative">
           <div className="relative">
             <div className="absolute inset-0 opacity-10">
@@ -28,7 +31,7 @@ const Dashboard = () => {
                 <rect width="100%" height="100%" fill="url(#pattern)" />
               </svg>
             </div>
-            <div className="relative"><Outlet></Outlet></div>
+            <div className="relative"><Outlet /></div>
           </div>
         </div>
       </div>
