@@ -1,13 +1,13 @@
 import axios from "axios";
 
 export const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://fei-server.vercel.app",
 });
 
 const useAxiosSecure = () => {
   axiosSecure.interceptors.request.use(
     (config) => {
-      const token = localStorage.getItem("access-token"); 
+      const token = localStorage.getItem("access-token");
       if (token) {
         config.headers.authorization = `Bearer ${token}`;
       }

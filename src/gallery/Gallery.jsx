@@ -18,7 +18,9 @@ const Gallery = () => {
   useEffect(() => {
     const fetchGallery = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/gallery/${id}`);
+        const response = await axios.get(
+          `https://fei-server.vercel.app/gallery/${id}`
+        );
         setGallery(response.data);
         console.log(response);
       } catch (error) {
@@ -35,7 +37,9 @@ const Gallery = () => {
         <h2 className="text-3xl font-bold text-center text-indigo-600 mb-8">
           {galleryData.title}
         </h2>
-        <p className="text-gray-500 text-lg mb-8">Event Date: {galleryData.date}</p>
+        <p className="text-gray-500 text-lg mb-8">
+          Event Date: {galleryData.date}
+        </p>
         <Masonry
           breakpointCols={breakpointColumns}
           className="flex gap-4"
@@ -45,7 +49,7 @@ const Gallery = () => {
             <img
               key={index}
               src={image}
-              alt=''
+              alt=""
               className="border-2 mb-4 border-gray-400 w-full object-cover"
             />
           ))}

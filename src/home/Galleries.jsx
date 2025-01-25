@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import useGallery from "../hooks/useGallery";
 import AOS from "aos";
-import "aos/dist/aos.css"; // Import AOS styles
+import "aos/dist/aos.css";
 import { Link } from "react-router-dom";
 
 const Galleries = () => {
@@ -9,7 +9,7 @@ const Galleries = () => {
 
   // Initialize AOS
   useEffect(() => {
-    AOS.init({});
+    AOS.init();
   }, []);
 
   // Slice the gallery to get only the last two events
